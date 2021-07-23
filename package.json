@@ -1,0 +1,60 @@
+{
+  "name": "fava",
+  "description": "A wannabe tiny largely-drop-in replacement for ava that works in the browser too.",
+  "version": "0.0.2",
+  "bin": "dist/src/bin.js",
+  "main": "dist/src/index.js",
+  "types": "dist/src/index.d.ts",
+  "scripts": {
+    "clean": "rimraf dist",
+    "compile": "tsc --skipLibCheck && tstei",
+    "compile:watch": "tsc --skipLibCheck --watch",
+    "test": "node dist/src/bin.js",
+    "test:watch": "node dist/src/bin.js --watch",
+    "prepublishOnly": "npm run clean && npm run compile && npm run test"
+  },
+  "bugs": {
+    "url": "https://github.com/fabiospampinato/fava/issues"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Fabio Spampinato",
+    "email": "spampinabio@gmail.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fabiospampinato/fava.git"
+  },
+  "keywords": [
+    "test",
+    "tests",
+    "testing",
+    "framework",
+    "bdd",
+    "tdd",
+    "simple",
+    "tiny",
+    "small",
+    "browser",
+    "isomorphic"
+  ],
+  "dependencies": {
+    "call-chainer": "^2.0.1",
+    "matcher": "^4.0.0",
+    "partial-compare": "^1.0.1",
+    "picomatch": "^2.3.0",
+    "promise-make-naked": "^1.0.0",
+    "proxy-watcher": "^3.4.1",
+    "specialist": "^0.4.0",
+    "tiny-readdir": "^1.5.0",
+    "watcher": "^1.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^16.4.1",
+    "@types/picomatch": "^2.2.5",
+    "rimraf": "^3.0.2",
+    "type-fest": "^1.2.2",
+    "typescript": "^4.3.5",
+    "typescript-transform-export-interop": "^1.0.4"
+  }
+}
