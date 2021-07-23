@@ -1,7 +1,7 @@
 
-<center>
+<p align="center">
   <img src="./resources/logo/logo.svg" alt="Fava's logo" width="300" />
-</center>
+</p>
 
 # [Fava](https://en.wikipedia.org/wiki/Vicia_faba) (WIP)
 
