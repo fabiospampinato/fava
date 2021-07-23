@@ -34,6 +34,8 @@ class Describer<Context extends {} = {}> {
 
   execute = async (): Promise<void> => {
 
+    //TODO: Make sure that hooks are called reliably, even in case of exceptions
+
     this.executed = true;
 
     const global = new Tester<Context> ( 'global', NOOP, new Flags ().flags ).api ();
