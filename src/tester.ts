@@ -424,6 +424,7 @@ class Tester<Context extends {} = {}> {
 
   timeout = ( ms: number, message?: string ): void => {
 
+    this.timeoutMessage = message || this.timeoutMessage;
     this.timeoutMs = ms;
 
   }
