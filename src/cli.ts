@@ -7,6 +7,7 @@ import {color} from 'specialist';
 import readdir from 'tiny-readdir';
 import Watcher from 'watcher';
 import {Options} from './types';
+import Env from './env';
 import Utils from './utils';
 
 /* MAIN */
@@ -62,7 +63,7 @@ const CLI = {
     const execute = ( filePath: string ): void => {
       divider ();
       const isSuccess = spawn ( filePath );
-      if ( !isSuccess && !options.watch ) {
+      if ( Env.options.failFast && !isSuccess && !options.watch ) {
         process.exit ( 1 );
       }
     };
