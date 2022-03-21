@@ -94,11 +94,11 @@ class Tester<Context extends {} = {}> {
     const NODE_ENV = process.env.NODE_ENV;
 
     const set = (): void => {
-      process.env.NODE_ENV = 'test';
+      process.env['NODE' + '_' + 'ENV'] = 'test';
     };
 
     const restore = (): void => {
-      process.env.NODE_ENV = NODE_ENV;
+      process.env['NODE' + '_' + 'ENV'] = NODE_ENV;
     };
 
     return (): void => {
