@@ -93,17 +93,23 @@ class Tester<Context extends {} = {}> {
 
     const NODE_ENV = process.env.NODE_ENV;
 
-    const set = (): void => {
-      process.env['NODE' + '_' + 'ENV'] = 'test';
+    const set = ( value?: string ): void => {
+      try { // This throws an error in Deno
+        process.env['NODE' + '_' + 'ENV'] = value;
+      } catch {}
+    };
+
+    const define = (): void => {
+      set ( 'test' );
     };
 
     const restore = (): void => {
-      process.env['NODE' + '_' + 'ENV'] = NODE_ENV;
+      set ( NODE_ENV );
     };
 
     return (): void => {
 
-      set ();
+      define ();
 
       return this.wrapCall ( fn, restore, restore );
 
