@@ -73,6 +73,10 @@ suite ( 'Example suite', describe => {
 
 For further documentation for now just refer to [`ava`'s](https://github.com/avajs/ava).
 
+## Testimonials
+
+- `@liquid`: I have used Fava and it's bean a pleasure.
+
 ## License
 
 MIT © Fabio Spampinato
