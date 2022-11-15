@@ -9,7 +9,7 @@ import CLI from './cli';
 
 const name = 'fava';
 const description = 'A wannabe tiny largely-drop-in replacement for ava that works in the browser too.';
-const version = '0.0.6';
+const version = '0.0.7';
 
 /* MAIN */
 
