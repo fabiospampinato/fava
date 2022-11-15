@@ -1,22 +1,23 @@
 
 /* IMPORT */
 
-import {DescribeImplementation} from './types';
 import {NOOP} from './constants';
 import Describer from './describer';
-import Flags from './flags';
+import Enhancer from './enhancer';
+import EnhancerRegistry from './enhancer.registry';
 import Register from './register';
-import Utils from './utils';
+import type Flags from './flags';
+import type {DescribeImplementation} from './types';
 
 /* MAIN */
 
-const describe = Utils.withHooks ( Utils.withFlags ( <Context extends {} = {}> ( flags: Flags, title: string, implementation: DescribeImplementation = NOOP ): void => {
+const describe = EnhancerRegistry.set ( 'describe', Enhancer.withHooks ( Enhancer.withFlags ( <Context extends {} = {}> ( flags: Flags, title: string, implementation: DescribeImplementation = NOOP ): void => {
 
   const describer = new Describer<Context> ( title, flags.flags );
 
   Register.describer ( describer, implementation );
 
-}));
+})));
 
 /* EXPORT */
 

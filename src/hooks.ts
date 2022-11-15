@@ -1,8 +1,8 @@
 
 /* IMPORT */
 
-import {FN, TestHook, TestHooks, TestHookImplementation} from './types';
 import {NOOP} from './constants';
+import type {FN, TestHook, TestHooks, TestHookImplementation} from './types';
 
 /* MAIN */
 

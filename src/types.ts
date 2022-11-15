@@ -19,7 +19,7 @@ type Tester<Context> = import ( './tester' ).default<Context>;
 
 // type Suiter = import ( './suiter' ).default;
 
-/* TYPES */
+/* MAIN */
 
 type AssertErrorExpectation = {
   instanceOf?: () => any,
@@ -34,6 +34,10 @@ type Callback = () => void;
 type Color = 'red' | 'green' | 'yellow';
 
 type DescribeImplementation = ( test: TestFN ) => void;
+
+type Exception = Error & {
+  code: string | number
+};
 
 type ErrorLine = {
   url: string,
@@ -81,4 +85,4 @@ type TestStatus = '✔' | '✖' | '⚠';
 
 /* EXPORT */
 
-export {FN, Promisable, AssertErrorExpectation, Callback, Color, DescribeImplementation, ErrorLine, Options, SuiteImplementation, Teardown, TestAPI, TestContext, TestFlag, TestFlags, TestHook, TestHooks, TestHookImplementation, TestImplementation, TestLog, TestPassed, TestStat, TestStats, TestStatus};
+export type {FN, Promisable, AssertErrorExpectation, Callback, Color, DescribeImplementation, Exception, ErrorLine, Options, SuiteImplementation, Teardown, TestAPI, TestContext, TestFlag, TestFlags, TestHook, TestHooks, TestHookImplementation, TestImplementation, TestLog, TestPassed, TestStat, TestStats, TestStatus};

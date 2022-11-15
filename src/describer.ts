@@ -1,12 +1,11 @@
 
 /* IMPORT */
 
-import {FN, Promisable, TestFlags} from './types';
 import {NOOP} from './constants';
 import Flags from './flags';
 import Hooks from './hooks';
 import Tester from './tester';
-import Utils from './utils';
+import type {FN, Promisable, TestFlags} from './types';
 
 /* MAIN */
 
@@ -53,7 +52,7 @@ class Describer<Context extends {} = {}> {
 
         const local = new Tester<Context> ( 'local', NOOP, new Flags ().flags ).api ();
 
-        local.ctx = Utils.lang.clone ( global.ctx );
+        local.ctx = { ...global.ctx };
 
         await this.hooks.hooks.beforeEach ( local );
 

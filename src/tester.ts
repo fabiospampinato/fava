@@ -3,11 +3,11 @@
 
 import makeNakedPromise from 'promise-make-naked';
 import {color} from 'specialist';
-import {FN, Callback, Promisable, Color, Teardown, TestAPI, TestContext, TestFlags, TestImplementation, TestLog, TestPassed, TestStats, TestStatus} from './types';
 import Assert from './assert';
 import {NOOP} from './constants';
 import Env from './env';
 import Utils from './utils';
+import type {FN, Callback, Promisable, Color, Teardown, TestAPI, TestContext, TestFlags, TestImplementation, TestLog, TestPassed, TestStats, TestStatus} from './types';
 
 /* MAIN */
 
@@ -91,7 +91,7 @@ class Tester<Context extends {} = {}> {
 
     if ( !Env.is.node ) return fn;
 
-    const NODE_ENV = process.env.NODE_ENV;
+    const NODE_ENV = process.env['NODE_ENV'];
 
     const set = ( value?: string ): void => {
       try { // This throws an error in Deno
@@ -339,7 +339,7 @@ class Tester<Context extends {} = {}> {
 
         } else {
 
-          const errorLines = Utils.getErrorLines ( error );
+          const errorLines = await Utils.getErrorLines ( error );
 
           if ( errorLines.length ) {
 

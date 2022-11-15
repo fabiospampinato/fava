@@ -1,9 +1,9 @@
 
 /* IMPORT */
 
-import {SuiteImplementation} from './types';
 import Register from './register';
 import Suiter from './suiter';
+import type {SuiteImplementation} from './types';
 
 /* MAIN */
 

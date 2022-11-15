@@ -1,7 +1,7 @@
 
 /* IMPORT */
 
-import {FN, TestFlag, TestFlags} from './types';
+import type {FN, TestFlag, TestFlags} from './types';
 
 /* MAIN */
 

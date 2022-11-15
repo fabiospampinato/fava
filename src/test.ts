@@ -1,22 +1,23 @@
 
 /* IMPORT */
 
-import {TestImplementation} from './types';
 import {NOOP} from './constants';
-import Flags from './flags';
+import Enhancer from './enhancer';
+import EnhancerRegistry from './enhancer.registry';
 import Register from './register';
 import Tester from './tester';
-import Utils from './utils';
+import type Flags from './flags';
+import type {TestImplementation} from './types';
 
 /* MAIN */
 
-const test = Utils.withHooks ( Utils.withFlags ( <Context extends {} = {}> ( flags: Flags, title: string, implementation: TestImplementation<Context> = NOOP ): void => {
+const test = EnhancerRegistry.set ( 'test', Enhancer.withHooks ( Enhancer.withFlags ( <Context extends {} = {}> ( flags: Flags, title: string, implementation: TestImplementation<Context> = NOOP ): void => {
 
   const tester = new Tester<Context> ( title, implementation, flags.flags );
 
   Register.tester ( tester );
 
-}));
+})));
 
 /* EXPORT */
 

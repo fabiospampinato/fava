@@ -1,12 +1,12 @@
 
 /* IMPORT */
 
-import {DescribeImplementation, SuiteImplementation} from './types';
-import describe from './describe';
-import Describer from './describer';
+import EnhancerRegistry from './enhancer.registry';
 import Executor from './executor';
-import Suiter from './suiter';
-import Tester from './tester';
+import type Describer from './describer';
+import type Suiter from './suiter';
+import type Tester from './tester';
+import type {DescribeImplementation, SuiteImplementation} from './types';
 
 /* MAIN */
 
@@ -28,7 +28,7 @@ class Register {
 
     Executor.set ( suiter );
 
-    implementation ( describe );
+    implementation ( EnhancerRegistry.get ( 'describe' ) );
 
   }
 

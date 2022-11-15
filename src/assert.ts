@@ -1,9 +1,8 @@
 
 /* IMPORT */
 
-import partialCompare from 'partial-compare';
-import {AssertErrorExpectation, Promisable} from './types';
 import Utils from './utils';
+import type {AssertErrorExpectation, Promisable} from './types';
 
 /* MAIN */
 
@@ -100,7 +99,7 @@ const Assert = {
 
   like: ( value: unknown, partial: unknown, message?: string ): void => {
 
-    if ( partialCompare ( value, partial ) ) return;
+    if ( Utils.lang.isLike ( value, partial ) ) return;
 
     throw new Error ( message ?? `Expected "${value}" to be like "${partial}"` );
 
@@ -108,7 +107,7 @@ const Assert = {
 
   notLike: ( value: unknown, partial: unknown, message?: string ): void => {
 
-    if ( !partialCompare ( value, partial ) ) return;
+    if ( !Utils.lang.isLike ( value, partial ) ) return;
 
     throw new Error ( message ?? `Expected "${value}" to not be like "${partial}"` );
 
@@ -168,9 +167,11 @@ const Assert = {
 
       if ( !Utils.lang.isUndefined ( code ) ) {
 
-        if ( error['code'] !== code ) {
+        const errorCode = Utils.lang.isException ( error ) ? error.code : undefined;
 
-          throw new Error ( `Expected error to have code "${code}" but got "${error['code']}"` );
+        if ( errorCode !== code ) {
+
+          throw new Error ( `Expected error to have code "${code}" but got "${errorCode}"` );
 
         }
 

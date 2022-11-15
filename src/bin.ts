@@ -3,8 +3,13 @@
 /* IMPORT */
 
 import {program, updater} from 'specialist';
-import {name, version, description} from '../package.json';
 import CLI from './cli';
+
+/* HELPERS */
+
+const name = 'fava';
+const description = 'A wannabe tiny largely-drop-in replacement for ava that works in the browser too.';
+const version = '0.0.6';
 
 /* MAIN */
 

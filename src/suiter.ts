@@ -1,15 +1,16 @@
 
 /* IMPORT */
 
-import matcher from 'matcher';
+import {isMatch} from 'matcher';
 import {color} from 'specialist';
-import {DescribeImplementation} from './types';
 import {ROOT_DESCRIBER_ID} from './constants';
 import Describer from './describer';
+import EnhancerRegistry from './enhancer.registry';
 import Env from './env';
 import Flags from './flags';
-import test from './test';
-import Tester from './tester';
+import Utils from './utils';
+import type Tester from './tester';
+import type {DescribeImplementation} from './types';
 
 /* MAIN */
 
@@ -46,7 +47,7 @@ class Suiter {
 
     this.stack.push ( describer );
 
-    implementation ( test );
+    implementation ( EnhancerRegistry.get ( 'test' ) );
 
     this.stack.pop ();
 
@@ -101,7 +102,8 @@ class Suiter {
   propagateFlags = async (): Promise<void> => {
 
     const propagate = ( source: Describer, target: Describer | Tester ): void => {
-      for ( const flag in source.flags ) {
+      const flags = Utils.lang.keys ( source.flags );
+      for ( const flag of flags ) {
         target.flags[flag] ||= source.flags[flag];
       }
     };
@@ -151,7 +153,7 @@ class Suiter {
     await this.root.visit ({
       onTester: tester => {
         if ( tester.flags.skip ) return;
-        if ( matcher.isMatch ( tester.title, Env.options.match ) ) return;
+        if ( isMatch ( tester.title, Env.options.match ) ) return;
         tester.flags.skip = true;
       }
     });
@@ -211,9 +213,10 @@ class Suiter {
 
     if ( Env.is.cli ) {
 
+      const path = await import ( 'node:path' );
       const filePath = process.argv[1];
       const folderRe = /^(.*)([\\\/])(test|tests|__tests__)(\1)/;
-      const testName = folderRe.test ( filePath ) ? filePath.replace ( folderRe, '' ) : require ( 'path' ).basename ( filePath );
+      const testName = folderRe.test ( filePath ) ? filePath.replace ( folderRe, '' ) : path.basename ( filePath );
 
       console.log ( `${color.cyan ( 'ℹ' )} File: ${testName}` );
 

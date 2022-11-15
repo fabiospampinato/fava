@@ -1,14 +1,14 @@
 
 /* IMPORT */
 
-import {spawnSync} from 'child_process';
+import {spawnSync} from 'node:child_process';
 import picomatch from 'picomatch';
 import {color} from 'specialist';
 import readdir from 'tiny-readdir';
 import Watcher from 'watcher';
-import {Options} from './types';
 import Env from './env';
 import Utils from './utils';
+import type {Options} from './types';
 
 /* MAIN */
 

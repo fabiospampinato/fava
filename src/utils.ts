@@ -1,12 +1,9 @@
 
 /* IMPORT */
 
-import chainer from 'call-chainer';
-import clone from 'proxy-watcher/dist/packages/clone';
-import isEqual from 'proxy-watcher/dist/packages/is_equal';
-import {FN, ErrorLine, TestHook, TestHookImplementation} from './types';
+import isEqual from 'are-deeply-equal';
 import Env from './env';
-import Flags from './flags';
+import type {Exception, ErrorLine} from './types';
 
 /* MAIN */
 
@@ -16,7 +13,6 @@ const Utils = {
 
   lang: { //TODO: Replace these with nanodash
 
-    clone,
     isEqual,
 
     escapeRegExp: ( str: string ): string => {
@@ -25,21 +21,77 @@ const Utils = {
 
     },
 
-    isError: ( x: any ): x is Error => {
+    keys: <T extends Record<string | number | symbol, unknown>> ( object: T ): (keyof T)[] => {
 
-      return x instanceof Error;
-
-    },
-
-    isString: ( x: any ): x is string => {
-
-      return typeof x === 'string';
+      return Object.keys ( object );
 
     },
 
-    isUndefined: ( x: any ): x is undefined => {
+    isException: ( value: unknown ): value is Exception => {
 
-      return x === undefined;
+      return Utils.lang.isError ( value ) && value.hasOwnProperty ( 'code' );
+
+    },
+
+    isError: ( value: unknown ): value is Error => {
+
+      return value instanceof Error;
+
+    },
+
+    isLike: ( value: unknown, partial: unknown ): boolean => {
+
+      if ( !Utils.lang.isPlainObject ( value ) ) return false;
+
+      if ( partial === undefined ) return true;
+
+      if ( !Utils.lang.isPlainObject ( partial ) ) return false;
+
+      const keys = Reflect.ownKeys ( partial );
+
+      for ( const key of keys ) {
+
+        const val = partial[key];
+
+        if ( Utils.lang.isPlainObject ( val ) ) {
+
+          return Utils.lang.isLike ( value[key], val );
+
+        } else {
+
+          return Object.is ( value[key], val );
+
+        }
+
+      }
+
+      return true;
+
+    },
+
+    isPlainObject: ( value: unknown ): value is Record<string | number | symbol, unknown> => {
+
+      if ( typeof value !== 'object' || value === null ) return false;
+
+      if ( Object.prototype.toString.call ( value ) !== '[object Object]' ) return false;
+
+      const prototype = Object.getPrototypeOf ( value );
+
+      if ( prototype === null ) return true;
+
+      return Object.getPrototypeOf ( prototype ) === null;
+
+    },
+
+    isString: ( value: unknown ): value is string => {
+
+      return typeof value === 'string';
+
+    },
+
+    isUndefined: ( value: unknown ): value is undefined => {
+
+      return value === undefined;
 
     }
 
@@ -47,7 +99,7 @@ const Utils = {
 
   /* API */
 
-  getErrorLines: ( error: Error ): ErrorLine[] => {
+  getErrorLines: async ( error: Error ): Promise<ErrorLine[]> => {
 
     const errorLines: ErrorLine[] = [];
 
@@ -55,8 +107,9 @@ const Utils = {
 
     try {
 
+      const fs = await import ( 'node:fs' );
       const filePath = process.argv[1];
-      const fileContent: string = require ( 'fs' ).readFileSync ( filePath, 'utf8' );
+      const fileContent: string = fs.readFileSync ( filePath, 'utf8' );
       const lines = fileContent.split ( /\r?\n|\r/g );
       const urlRe = new RegExp ( `${Utils.lang.escapeRegExp ( filePath )}:(\\d+)`, 'g' );
 
@@ -81,35 +134,6 @@ const Utils = {
     if ( Env.is.cli ) return process.stdout.columns;
 
     return 72;
-
-  },
-
-  withFlags: <Arguments extends any[], Return extends any> ( fn: FN<[Flags, ...Arguments], Return> ): FN<Arguments, Return> => {
-
-    return chainer ( Flags, ( flags: Flags, ...args: Arguments ): Return => {
-
-      return fn ( flags, ...args );
-
-    });
-
-  },
-
-  withHooks: <Context extends {}, T extends FN> ( fn: T ): T & Record<TestHook, TestHookImplementation<Context>> => {
-
-    const makeHookSetter = ( hook: TestHook ) => {
-      return ( fn: TestHookImplementation<Context> ): void => {
-        const suiter = require ( './executor' ).default.get (); //FIXME: Importing it normally causes a cycic dependency issue
-        const describer = suiter.current;
-        describer.hooks[hook]( fn );
-      };
-    };
-
-    fn['before'] = makeHookSetter ( 'before' );
-    fn['after'] = makeHookSetter ( 'after' );
-    fn['beforeEach'] = makeHookSetter ( 'beforeEach' );
-    fn['afterEach'] = makeHookSetter ( 'afterEach' );
-
-    return fn as ( T & Record<TestHook, TestHookImplementation<Context>> );
 
   }
 

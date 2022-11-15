@@ -1,11 +1,11 @@
 
 /* IMPORT */
 
-const {assert, describe} = require ( '..' );
+import {assert, describe} from '../dist/index.js';
 
 /* MAIN */
 
-describe ( 'Assert', test => {
+describe ( 'No Errors', test => {
 
   test ( 'pass', t => {
 
@@ -229,7 +229,7 @@ describe ( 'Assert', test => {
 
 });
 
-describe.skip ( 'Assert (Errors)', test => {
+describe.skip ( 'Errors', test => {
 
   test ( 'pass', () => {
 
