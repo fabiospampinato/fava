@@ -3,7 +3,7 @@
 
 import {spawnSync} from 'node:child_process';
 import picomatch from 'picomatch';
-import {color} from 'specialist';
+import color from 'tiny-colors';
 import readdir from 'tiny-readdir';
 import Watcher from 'watcher';
 import Env from './env';

@@ -2,7 +2,7 @@
 /* IMPORT */
 
 import {isMatch} from 'matcher';
-import {color} from 'specialist';
+import color from 'tiny-colors';
 import {ROOT_DESCRIBER_ID} from './constants';
 import Describer from './describer';
 import EnhancerRegistry from './enhancer.registry';

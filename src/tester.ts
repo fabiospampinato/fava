@@ -2,7 +2,7 @@
 /* IMPORT */
 
 import makeNakedPromise from 'promise-make-naked';
-import {color} from 'specialist';
+import color from 'tiny-colors';
 import Assert from './assert';
 import {NOOP} from './constants';
 import Env from './env';
