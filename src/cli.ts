@@ -27,7 +27,7 @@ const CLI = {
     const includeGlobs = ['**/test.{js,mjs}', '**/src/test.{js,mjs}', '**/source/test.{js,mjs}', '**/test-*.{js,mjs}', '**/*.spec.{js,mjs}', '**/*.test.{js,mjs}', '**/test/**/*.{js,mjs}', '**/tests/**/*.{js,mjs}', '**/__tests__/**/*.{js,mjs}'];
     const include = ( targetPath: string ): boolean => zeptomatch ( includeGlobs, targetPath );
 
-    const ignoreGlobs = ['**/node_modules/**', '**/dist/**', '**/out/**', '**/_[!_]*', '**/__tests__/**/__helper__/**/*', '**/__tests__/**/__helpers__/**/*', '**/__tests__/**/__fixture__/**/*', '**/__tests__/**/__fixtures__/**/*', '**/test/**/helper/**/*', '**/test/**/helpers/**/*', '**/test/**/fixture/**/*', '**/test/**/fixtures/**/*', '**/tests/**/helper/**/*', '**/tests/**/helpers/**/*', '**/tests/**/fixture/**/*', '**/tests/**/fixtures/**/*'];
+    const ignoreGlobs = ['**/.git/**', '**/node_modules/**', '**/dist/**', '**/out/**', '**/_[!_]*', '**/__tests__/**/__helper__/**/*', '**/__tests__/**/__helpers__/**/*', '**/__tests__/**/__fixture__/**/*', '**/__tests__/**/__fixtures__/**/*', '**/test/**/helper/**/*', '**/test/**/helpers/**/*', '**/test/**/fixture/**/*', '**/test/**/fixtures/**/*', '**/tests/**/helper/**/*', '**/tests/**/helpers/**/*', '**/tests/**/fixture/**/*', '**/tests/**/fixtures/**/*'];
     const ignore = ( targetPath: string ): boolean => zeptomatch ( ignoreGlobs, targetPath );
 
     const spawn = ( filePath: string ): boolean => {
