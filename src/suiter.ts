@@ -5,8 +5,8 @@ import color from 'tiny-colors';
 import zeptomatch from 'zeptomatch';
 import {ROOT_DESCRIBER_ID} from './constants';
 import Describer from './describer';
-import EnhancerRegistry from './enhancer.registry';
 import Env from './env';
+import Factory from './factory';
 import Flags from './flags';
 import Utils from './utils';
 import type Tester from './tester';
@@ -47,7 +47,7 @@ class Suiter {
 
     this.stack.push ( describer );
 
-    implementation ( EnhancerRegistry.get ( 'test' ) );
+    implementation ( Factory.makeTest () );
 
     this.stack.pop ();
 

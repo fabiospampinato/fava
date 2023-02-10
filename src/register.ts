@@ -1,8 +1,8 @@
 
 /* IMPORT */
 
-import EnhancerRegistry from './enhancer.registry';
 import Executor from './executor';
+import Factory from './factory';
 import type Describer from './describer';
 import type Suiter from './suiter';
 import type Tester from './tester';
@@ -28,7 +28,7 @@ class Register {
 
     Executor.set ( suiter );
 
-    implementation ( EnhancerRegistry.get ( 'describe' ) );
+    implementation ( Factory.makeDescribe () );
 
   }
 
