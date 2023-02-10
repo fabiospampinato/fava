@@ -1,8 +1,8 @@
 
 /* IMPORT */
 
-import {isMatch} from 'matcher';
 import color from 'tiny-colors';
+import zeptomatch from 'zeptomatch';
 import {ROOT_DESCRIBER_ID} from './constants';
 import Describer from './describer';
 import EnhancerRegistry from './enhancer.registry';
@@ -153,7 +153,7 @@ class Suiter {
     await this.root.visit ({
       onTester: tester => {
         if ( tester.flags.skip ) return;
-        if ( isMatch ( tester.title, Env.options.match ) ) return;
+        if ( zeptomatch ( Env.options.match, tester.title ) ) return;
         tester.flags.skip = true;
       }
     });

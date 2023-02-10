@@ -32,19 +32,17 @@
   "dependencies": {
     "are-deeply-equal": "^1.0.1",
     "call-chainer": "^3.0.0",
-    "matcher": "^5.0.0",
-    "picomatch": "^2.3.1",
     "promise-make-naked": "^2.0.0",
-    "specialist": "^0.6.1",
+    "specialist": "^1.0.1",
     "tiny-colors": "^2.0.1",
-    "tiny-readdir": "^2.0.0",
-    "watcher": "^2.0.0"
+    "tiny-readdir": "^2.2.0",
+    "watcher": "^2.2.2",
+    "zeptomatch": "^1.0.0"
   },
   "devDependencies": {
-    "@types/node": "^18.11.9",
-    "@types/picomatch": "^2.3.0",
-    "tsex": "^1.1.2",
-    "type-fest": "^3.2.0",
-    "typescript": "^4.8.4"
+    "@types/node": "^18.13.0",
+    "tsex": "^2.1.0",
+    "type-fest": "^3.5.7",
+    "typescript": "^4.9.5"
   }
 }

@@ -2,10 +2,10 @@
 /* IMPORT */
 
 import {spawnSync} from 'node:child_process';
-import picomatch from 'picomatch';
 import color from 'tiny-colors';
 import readdir from 'tiny-readdir';
 import Watcher from 'watcher';
+import zeptomatch from 'zeptomatch';
 import Env from './env';
 import Utils from './utils';
 import type {Options} from './types';
@@ -22,16 +22,13 @@ const CLI = {
     //TODO: Add support for executing different test files in parallel
 
     const filterGlobs = globs;
-    const filterMatchers = filterGlobs.map ( glob => picomatch ( glob ) );
-    const filter = ( targetPath: string ): boolean => filterMatchers.some ( matcher => matcher ( targetPath ) );
+    const filter = ( targetPath: string ): boolean => zeptomatch ( filterGlobs, targetPath );
 
     const includeGlobs = ['**/test.{js,mjs}', '**/src/test.{js,mjs}', '**/source/test.{js,mjs}', '**/test-*.{js,mjs}', '**/*.spec.{js,mjs}', '**/*.test.{js,mjs}', '**/test/**/*.{js,mjs}', '**/tests/**/*.{js,mjs}', '**/__tests__/**/*.{js,mjs}'];
-    const includeMatchers = includeGlobs.map ( glob => picomatch ( glob ) );
-    const include = ( targetPath: string ): boolean => includeMatchers.some ( matcher => matcher ( targetPath ) );
+    const include = ( targetPath: string ): boolean => zeptomatch ( includeGlobs, targetPath );
 
     const ignoreGlobs = ['**/node_modules/**', '**/dist/**', '**/out/**', '**/_[!_]*', '**/__tests__/**/__helper__/**/*', '**/__tests__/**/__helpers__/**/*', '**/__tests__/**/__fixture__/**/*', '**/__tests__/**/__fixtures__/**/*', '**/test/**/helper/**/*', '**/test/**/helpers/**/*', '**/test/**/fixture/**/*', '**/test/**/fixtures/**/*', '**/tests/**/helper/**/*', '**/tests/**/helpers/**/*', '**/tests/**/fixture/**/*', '**/tests/**/fixtures/**/*'];
-    const ignoreMatchers = ignoreGlobs.map ( glob => picomatch ( glob ) );
-    const ignore = ( targetPath: string ): boolean => ignoreMatchers.some ( matcher => matcher ( targetPath ) );
+    const ignore = ( targetPath: string ): boolean => zeptomatch ( ignoreGlobs, targetPath );
 
     const spawn = ( filePath: string ): boolean => {
       const {status} = spawnSync ( process.execPath, [filePath], {
