@@ -181,7 +181,7 @@ const Assert = {
 
   },
 
-  throws: ( fn: () => any, expectation?: AssertErrorExpectation, message?: string ): void => {
+  throws: ( fn: () => void, expectation?: AssertErrorExpectation, message?: string ): void => {
 
     try {
 
@@ -199,7 +199,7 @@ const Assert = {
 
   },
 
-  throwsAsync: async ( fn: () => Promisable<any>, expectation?: AssertErrorExpectation, message?: string ): Promise<void> => {
+  throwsAsync: async ( fn: () => Promisable<void>, expectation?: AssertErrorExpectation, message?: string ): Promise<void> => {
 
     try {
 
@@ -217,7 +217,7 @@ const Assert = {
 
   },
 
-  notThrows: ( fn: () => any, message?: string ): void => {
+  notThrows: ( fn: () => void, message?: string ): void => {
 
     try {
 
@@ -231,7 +231,7 @@ const Assert = {
 
   },
 
-  notThrowsAsync: async ( fn: () => Promisable<any>, message?: string ): Promise<void> => {
+  notThrowsAsync: async ( fn: () => Promisable<void>, message?: string ): Promise<void> => {
 
     try {
 

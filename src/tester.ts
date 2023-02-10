@@ -42,7 +42,7 @@ class Tester<Context extends {} = {}> {
 
   /* PRIVATE API */
 
-  private makeAssertion = <Arguments extends any[], Return extends any> ( assertion: FN<Arguments, Return> ): FN<Arguments, Return> => {
+  private makeAssertion = <Arguments extends unknown[], Return extends unknown> ( assertion: FN<Arguments, Return> ): FN<Arguments, Return> => {
 
     const onSuccess = () => this.stats.passed += 1;
     const onError = () => this.stats.failed += 1;
@@ -150,7 +150,7 @@ class Tester<Context extends {} = {}> {
     return async (): Promise<void> => {
 
       const {reject, promise: promiseTimeout} = makeNakedPromise<void> ();
-      const promiseTest = new Promise<any> ( resolve => resolve ( fn () ) );
+      const promiseTest = new Promise<void> ( resolve => resolve ( fn () ) );
       const onTimeout = () => reject ( new Error ( this.timeoutMessage ) );
       const onCleanup = () => clearTimeout ( timeoutId );
       const onCall = () => Promise.race ([ promiseTest, promiseTimeout ]);

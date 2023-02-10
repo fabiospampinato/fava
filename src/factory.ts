@@ -7,7 +7,7 @@ import Enhancer from './enhancer';
 import Register from './register';
 import Tester from './tester';
 import type Flags from './flags';
-import type {DescribeImplementation} from './types';
+import type {DescribeImplementation, TestImplementation} from './types';
 
 /* MAIN */
 
