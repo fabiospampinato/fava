@@ -27,6 +27,12 @@ const Utils = {
 
     },
 
+    hang: (): Promise<void> => {
+
+      return new Promise ( () => {} );
+
+    },
+
     isException: ( value: unknown ): value is Exception => {
 
       return Utils.lang.isError ( value ) && value.hasOwnProperty ( 'code' );

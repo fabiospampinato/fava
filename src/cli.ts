@@ -99,9 +99,11 @@ const CLI = {
       watch ();
       input ();
 
+      await Utils.lang.hang ();
+
     } else {
 
-      find ();
+      await find ();
 
     }
 
