@@ -95,7 +95,8 @@ class Tester<Context extends {} = {}> {
 
     const set = ( value?: string ): void => {
       try { // This throws an error in Deno
-        process.env['NODE' + '_' + 'ENV'] = value;
+        const NODE_ENV_NAME = 'NODE' + '_' + 'ENV'; // Otherwise this gets messed up in Bun
+        process.env[NODE_ENV_NAME] = value;
       } catch {}
     };
 
