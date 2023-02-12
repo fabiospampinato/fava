@@ -3,8 +3,6 @@
 
 type FN<Arguments extends any[] = any[], Return = any> = ( ...args: Arguments ) => Return;
 
-type PartialDeep<T> = import ( 'type-fest' ).PartialDeep<T>;
-
 type Promisable<T> = Promise<T> | T;
 
 type DescribeFN = typeof import ( './describe' ).default;
@@ -59,7 +57,7 @@ type Teardown = () => Promisable<void>;
 
 type TestAPI<Context> = Pick<Tester<Context>, 'title' | 'passed' | 'ctx' | 'log' | 'plan' | 'teardown' | 'timeout' | 'pass' | 'fail' | 'assert' | 'truthy' | 'falsy' | 'true' | 'false' | 'is' | 'not' | 'deepEqual' | 'notDeepEqual' | 'like' | 'notLike' | 'throws' | 'throwsAsync' | 'notThrows' | 'notThrowsAsync' | 'regex' | 'notRegex'> & { context: TestContext<Context> };
 
-type TestContext<Context> = PartialDeep<Context> | {}; //TSC: Not sure why the union type is needed here
+type TestContext<Context> = Partial<Context> | {}; //TSC: Not sure why the union type is needed here
 
 type TestFlag = 'failing' | 'only' | 'serial' | 'skip' | 'todo';
 
