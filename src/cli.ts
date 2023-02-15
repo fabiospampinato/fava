@@ -64,7 +64,7 @@ const CLI = {
     const execute = ( filePath: string ): void => {
       divider ();
       const isSuccess = spawn ( filePath );
-      if ( Env.options.failFast && !isSuccess && !options.watch ) {
+      if ( ( Env.options.failFast || options.failFast ) && !isSuccess && !options.watch ) {
         process.exit ( 1 );
       }
     };
