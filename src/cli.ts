@@ -2,6 +2,7 @@
 /* IMPORT */
 
 import {execFileSync} from 'node:child_process';
+import {setTimeout as delay} from 'node:timers/promises';
 import color from 'tiny-colors';
 import readdir from 'tiny-readdir';
 import Watcher from 'watcher';
@@ -89,7 +90,10 @@ const CLI = {
 
     const find = async (): Promise<void> => {
       const {files} = await readdir ( process.cwd (), { ignore } );
-      files.forEach ( onChange );
+      for ( const file of files ) {
+        onChange ( file );
+        await delay ( 0 );
+      }
     };
 
     const onChange = ( targetPath: string ): void => {
