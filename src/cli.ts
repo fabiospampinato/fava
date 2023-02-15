@@ -1,7 +1,7 @@
 
 /* IMPORT */
 
-import {spawnSync} from 'node:child_process';
+import {execFileSync} from 'node:child_process';
 import color from 'tiny-colors';
 import readdir from 'tiny-readdir';
 import Watcher from 'watcher';
@@ -31,18 +31,22 @@ const CLI = {
     const ignore = ( targetPath: string ): boolean => zeptomatch ( ignoreGlobs, targetPath );
 
     const spawn = ( filePath: string ): boolean => {
-      const {status} = spawnSync ( process.execPath, [filePath], {
-        stdio: ['ignore', 'inherit', 'inherit'],
-        env: {
-          ...process.env,
-          FAVA_CLI: '1',
-          FAVA_FAIL_FAST: options.failFast ? '1' : '0',
-          FAVA_MATCH: options.match?.length ? options.match.join ( ',' ) : '',
-          FAVA_TIMEOUT: options.timeout ? String ( options.timeout ) : '0',
-          FAVA_VERBOSE: options.verbose ? '1' : '0'
-        }
-      });
-      return !status;
+      try {
+        execFileSync ( process.execPath, [filePath], {
+          stdio: ['ignore', 'inherit', 'inherit'],
+          env: {
+            ...process.env,
+            FAVA_CLI: '1',
+            FAVA_FAIL_FAST: options.failFast ? '1' : '0',
+            FAVA_MATCH: options.match?.length ? options.match.join ( ',' ) : '',
+            FAVA_TIMEOUT: options.timeout ? String ( options.timeout ) : '0',
+            FAVA_VERBOSE: options.verbose ? '1' : '0'
+          }
+        });
+        return true;
+      } catch {
+        return false;
+      }
     };
 
     const divider = (() => {
