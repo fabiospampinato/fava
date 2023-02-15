@@ -59,6 +59,28 @@ class Tester<Context extends {} = {}> {
 
   }
 
+  private wrapAssert = ( fn: Callback ): Callback => {
+
+    const {assert} = console;
+
+    const wrap = (): void => {
+      console.assert = Assert.true;
+    };
+
+    const unwrap = (): void => {
+      console.assert = assert;
+    };
+
+    return (): void => {
+
+      wrap ();
+
+      return this.wrapCall ( fn, unwrap, unwrap );
+
+    };
+
+  }
+
   private wrapCall = <T> ( onCall: FN<[], T>, onSuccess: Callback, onError: Callback ): T => {
 
     try {
@@ -230,7 +252,7 @@ class Tester<Context extends {} = {}> {
 
   call = async (): Promise<void> => {
 
-    await this.wrapEnv ( this.wrapLogger ( this.wrapTimer ( this.wrapTimeout ( () => this.implementation ( this.api () ) ) ) ) )();
+    await this.wrapAssert ( this.wrapEnv ( this.wrapLogger ( this.wrapTimer ( this.wrapTimeout ( () => this.implementation ( this.api () ) ) ) ) ) )();
 
   }
 
