@@ -33,7 +33,7 @@
     "are-deeply-equal": "^1.0.1",
     "call-chainer": "^3.0.0",
     "promise-make-naked": "^2.0.0",
-    "specialist": "^1.0.2",
+    "specialist": "^1.1.0",
     "tiny-colors": "^2.0.2",
     "tiny-readdir": "^2.2.0",
     "watcher": "^2.2.2",
@@ -41,7 +41,7 @@
   },
   "devDependencies": {
     "@types/node": "^18.13.0",
-    "fava": "^0.1.1",
+    "fava": "^0.1.2",
     "tsex": "^2.1.0",
     "typescript": "^4.9.5"
   }
