@@ -2,7 +2,7 @@
   "name": "fava",
   "repository": "github:fabiospampinato/fava",
   "description": "A wannabe tiny largely-drop-in replacement for ava that works in the browser too.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "type": "module",
   "bin": "dist/bin.js",
   "main": "dist/index.js",
