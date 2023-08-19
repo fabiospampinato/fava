@@ -7,11 +7,11 @@ type Promisable<T> = Promise<T> | T;
 
 type DescribeFN = typeof import ( './describe' ).default;
 
-// type Describer<Context> = import ( './describer' ).default<Context>;
+// type Describer<Context extends {}> = import ( './describer' ).default<Context>;
 
 type TestFN = typeof import ( './test' ).default;
 
-type Tester<Context> = import ( './tester' ).default<Context>;
+type Tester<Context extends {}> = import ( './tester' ).default<Context>;
 
 // type SuiteFN = typeof import ( './suite' ).default;
 
@@ -55,9 +55,9 @@ type SuiteImplementation = ( describe: DescribeFN ) => void;
 
 type Teardown = () => Promisable<void>;
 
-type TestAPI<Context> = Pick<Tester<Context>, 'title' | 'passed' | 'ctx' | 'log' | 'plan' | 'teardown' | 'timeout' | 'pass' | 'fail' | 'assert' | 'truthy' | 'falsy' | 'true' | 'false' | 'is' | 'not' | 'deepEqual' | 'notDeepEqual' | 'like' | 'notLike' | 'throws' | 'throwsAsync' | 'notThrows' | 'notThrowsAsync' | 'regex' | 'notRegex'> & { context: TestContext<Context> };
+type TestAPI<Context extends {} = {}> = Pick<Tester<Context>, 'title' | 'passed' | 'ctx' | 'log' | 'plan' | 'teardown' | 'timeout' | 'pass' | 'fail' | 'assert' | 'truthy' | 'falsy' | 'true' | 'false' | 'is' | 'not' | 'deepEqual' | 'notDeepEqual' | 'like' | 'notLike' | 'throws' | 'throwsAsync' | 'notThrows' | 'notThrowsAsync' | 'regex' | 'notRegex'> & { context: TestContext<Context> };
 
-type TestContext<Context> = Partial<Context> | {}; //TSC: Not sure why the union type is needed here
+type TestContext<Context extends {}> = Partial<Context> | {}; //TSC: Not sure why the union type is needed here
 
 type TestFlag = 'failing' | 'only' | 'serial' | 'skip' | 'todo';
 
@@ -65,11 +65,11 @@ type TestFlags = Record<TestFlag, boolean>;
 
 type TestHook = 'before' | 'after' | 'beforeEach' | 'afterEach';
 
-type TestHooks<Context> = Record<TestHook, TestHookImplementation<Context>>;
+type TestHooks<Context extends {}> = Record<TestHook, TestHookImplementation<Context>>;
 
-type TestHookImplementation<Context> = TestImplementation<Context>;
+type TestHookImplementation<Context extends {}> = TestImplementation<Context>;
 
-type TestImplementation<Context> = ( t: TestAPI<Context> ) => Promisable<void>;
+type TestImplementation<Context extends {}> = ( t: TestAPI<Context> ) => Promisable<void>;
 
 type TestLog = any;
 
