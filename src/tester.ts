@@ -6,6 +6,7 @@ import color from 'tiny-colors';
 import Assert from './assert';
 import {NOOP} from './constants';
 import Env from './env';
+import {tapi} from './t';
 import Utils from './utils';
 import type {FN, Callback, Promisable, Color, Teardown, TestAPI, TestContext, TestFlags, TestImplementation, TestLog, TestPassed, TestStats, TestStatus} from './types';
 
@@ -54,6 +55,29 @@ class Tester<Context extends {} = {}> {
       const onCall = (): Return => assertion.apply ( undefined, args );
 
       return this.wrapCall ( onCall, onSuccess, onError );
+
+    };
+
+  }
+
+  private wrapApi = ( fn: FN<[TestAPI<Context>], Promisable<void>> ): FN<[], Promise<void>> => {
+
+    return async (): Promise<void> => {
+
+      const api = this.api ();
+      const tapiPrev = tapi.current;
+
+      try {
+
+        tapi.current = api;
+
+        return await fn ( api );
+
+      } finally {
+
+        tapi.current = tapiPrev;
+
+      }
 
     };
 
@@ -252,7 +276,7 @@ class Tester<Context extends {} = {}> {
 
   call = async (): Promise<void> => {
 
-    await this.wrapAssert ( this.wrapEnv ( this.wrapLogger ( this.wrapTimer ( this.wrapTimeout ( () => this.implementation ( this.api () ) ) ) ) ) )();
+    await this.wrapAssert ( this.wrapEnv ( this.wrapLogger ( this.wrapTimer ( this.wrapTimeout ( this.wrapApi ( this.implementation ) ) ) ) ) )();
 
   }
 
