@@ -79,7 +79,7 @@ type TestStat = 'failed' | 'passed' | 'planned' | 'total';
 
 type TestStats = Record<TestStat, number>;
 
-type TestStatus = '✔' | '✖' | '⚠';
+type TestStatus = '✔' | '✖' | '!';
 
 /* EXPORT */
 

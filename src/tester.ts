@@ -294,7 +294,7 @@ class Tester<Context extends {} = {}> {
 
         } else {
 
-          return this.result ( -1, '⚠', 'yellow' );
+          return this.result ( -1, '!', 'yellow' );
 
         }
 
@@ -308,7 +308,7 @@ class Tester<Context extends {} = {}> {
 
       if ( this.flags.skip ) {
 
-        return this.result ( -1, '⚠', 'yellow' );
+        return this.result ( -1, '!', 'yellow' );
 
       }
 
@@ -374,7 +374,7 @@ class Tester<Context extends {} = {}> {
       const prefix = this.prefixes.length ? `${this.prefixes.join ( ` ${color.dim ( '›' )} ` )} ${color.dim ( '›' )} ` : '';
       const suffix = this.duration >= 500 ? color.dim ( ` (${this.duration}ms)` ) : '';
 
-      console.log ( `${color[statusColor]( status )} ${prefix}${this.title}${suffix}` );
+      console.log ( `${color[statusColor].bold ( status )} ${prefix}${this.title}${suffix}` );
 
       if ( error ) {
 

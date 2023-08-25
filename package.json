@@ -34,7 +34,7 @@
     "call-chainer": "^3.0.0",
     "promise-make-naked": "^2.0.0",
     "specialist": "^1.3.0",
-    "tiny-colors": "^2.0.2",
+    "tiny-colors": "^2.1.2",
     "tiny-readdir": "^2.2.0",
     "watcher": "^2.3.0",
     "zeptomatch": "^1.1.3"
