@@ -2,7 +2,7 @@
 /* IMPORT */
 
 import {execFileSync} from 'node:child_process';
-import {setTimeout as delay} from 'node:timers/promises';
+import delay from 'promise-resolve-timeout';
 import color from 'tiny-colors';
 import readdir from 'tiny-readdir';
 import Watcher from 'watcher';
