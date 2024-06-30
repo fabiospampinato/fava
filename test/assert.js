@@ -227,6 +227,18 @@ describe ( 'No Errors', test => {
 
   });
 
+  test ( 'wait', async t => {
+
+    const start = Date.now ();
+
+    await assert.wait ( 500 );
+
+    const end = Date.now ();
+
+    t.true ( end - start >= 500 );
+
+  });
+
 });
 
 describe.skip ( 'Errors', test => {
@@ -405,6 +417,18 @@ describe.skip ( 'Errors', test => {
   test ( 'notRegex', () => {
 
     assert.notRegex ( 'foo123', /\d/ );
+
+  });
+
+  test ( 'wait', async () => {
+
+    const start = Date.now ();
+
+    await assert.wait ( 500 );
+
+    const end = Date.now ();
+
+    assert.true ( end - start >= 500 );
 
   });
 

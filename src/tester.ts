@@ -503,6 +503,7 @@ class Tester<Context extends {} = {}> {
   notThrowsAsync = this.makeAssertion ( Assert.notThrowsAsync )
   regex = this.makeAssertion ( Assert.regex )
   notRegex = this.makeAssertion ( Assert.notRegex )
+  wait = Assert.wait
 
 }
 

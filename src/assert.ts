@@ -259,6 +259,16 @@ const Assert = {
 
     throw new Error ( message ?? `Expected "${str}" to not match the regex "${regex}"` );
 
+  },
+
+  wait: ( ms: number ): Promise<void> => {
+
+    return new Promise ( resolve => {
+
+      setTimeout ( resolve, ms );
+
+    });
+
   }
 
 };
