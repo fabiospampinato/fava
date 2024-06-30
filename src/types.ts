@@ -55,7 +55,7 @@ type SuiteImplementation = ( describe: DescribeFN ) => void;
 
 type Teardown = () => Promisable<void>;
 
-type TestAPI<Context extends {} = {}> = Pick<Tester<Context>, 'title' | 'passed' | 'ctx' | 'log' | 'plan' | 'teardown' | 'timeout' | 'pass' | 'fail' | 'assert' | 'truthy' | 'falsy' | 'true' | 'false' | 'is' | 'not' | 'deepEqual' | 'notDeepEqual' | 'like' | 'notLike' | 'throws' | 'throwsAsync' | 'notThrows' | 'notThrowsAsync' | 'regex' | 'notRegex'> & { context: TestContext<Context> };
+type TestAPI<Context extends {} = {}> = Pick<Tester<Context>, 'title' | 'passed' | 'ctx' | 'log' | 'plan' | 'teardown' | 'timeout' | 'pass' | 'fail' | 'assert' | 'truthy' | 'falsy' | 'true' | 'false' | 'is' | 'not' | 'deepEqual' | 'notDeepEqual' | 'like' | 'notLike' | 'throws' | 'throwsAsync' | 'notThrows' | 'notThrowsAsync' | 'regex' | 'notRegex' | 'wait'> & { context: TestContext<Context> };
 
 type TestContext<Context extends {}> = Partial<Context> | {}; //TSC: Not sure why the union type is needed here
 

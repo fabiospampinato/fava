@@ -231,7 +231,7 @@ describe ( 'No Errors', test => {
 
     const start = Date.now ();
 
-    await assert.wait ( 500 );
+    await t.wait ( 500 );
 
     const end = Date.now ();
 

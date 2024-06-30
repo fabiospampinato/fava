@@ -269,7 +269,8 @@ class Tester<Context extends {} = {}> {
       get notThrows () { return self.notThrows; },
       get notThrowsAsync () { return self.notThrowsAsync; },
       get regex () { return self.regex; },
-      get notRegex () { return self.notRegex; }
+      get notRegex () { return self.notRegex; },
+      get wait () { return self.wait; }
     };
 
   }
