@@ -61,11 +61,15 @@ const Utils = {
 
         if ( Utils.lang.isPlainObject ( val ) ) {
 
-          return Utils.lang.isLike ( value[key], val );
+          const isLike = Utils.lang.isLike ( value[key], val );
+
+          if ( !isLike ) return false;
 
         } else {
 
-          return Object.is ( value[key], val );
+          const isEqual = Object.is ( value[key], val );
+
+          if ( !isEqual ) return false;
 
         }
 
